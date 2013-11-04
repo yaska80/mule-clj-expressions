@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.4/mule.xsd">
+
+    <flow name="value-flow">
+        <expression-transformer>
+            <return-argument expression="#[clojure:123456]"/>
+        </expression-transformer>
+    </flow>
+    <flow name="use-message-flow">
+        <expression-transformer>
+            <return-argument expression="#[clojure:(.getPayload message)]"/>
+        </expression-transformer>
+    </flow>
+    <flow name="use-flow-vars-flow">
+        <expression-transformer>
+            <return-argument expression="#[clojure:(flow-vars ::flow-test-property)]"/>
+        </expression-transformer>
+    </flow>
+    <flow name="use-session-vars-flow">
+        <expression-transformer>
+            <return-argument expression="#[clojure:(session-vars ::session-test-property)]"/>
+        </expression-transformer>
+    </flow>
+    <flow name="use-outbound-vars-flow">
+        <expression-transformer>
+            <return-argument expression="#[clojure:(outbound ::outbound-test-property)]"/>
+        </expression-transformer>
+    </flow>
+    <flow name="use-inbound-vars-flow">
+        <expression-transformer>
+            <return-argument expression="#[clojure:(inbound ::inbound-test-property)]"/>
+        </expression-transformer>
+    </flow>
+</mule>
